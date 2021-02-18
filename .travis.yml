@@ -5,9 +5,9 @@ language: java
 sudo: required
 
 jdk:
-- openjdk11
-# - oraclejdk8
-# `openjdk8` not available
+ - openjdk11
+ - openjdk8
+
 
 before_install:
      - |
@@ -24,7 +24,13 @@ install:
 
 - mv stanford-corenlp-models-current.jar stanford-corenlp-4.2.0-models.jar
 # necessary for `mvn install`
- 
+jobs:
+   exclude:
+      - arch: ppc64le
+        jdk: openjdk8 
+      - arch: amd64
+        jdk: openjdk11
+
 
 script:
 - ant
