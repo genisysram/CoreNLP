@@ -9,6 +9,12 @@ jdk:
 # - oraclejdk8
 # `openjdk8` not available
 
+before_install:
+     - |
+       if [[ "$TRAVIS_CPU_ARCH" = "ppc64le" ]]; then 
+        sudo apt update ;sudo  apt install ant; ant -version
+       fi 
+
 install:
 # download models (see `README.md`)
 - wget http://nlp.stanford.edu/software/stanford-corenlp-models-current.jar
@@ -18,13 +24,7 @@ install:
 
 - mv stanford-corenlp-models-current.jar stanford-corenlp-4.2.0-models.jar
 # necessary for `mvn install`
-after_install:
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "ppc64le" ]]; then
-  	 apt update
-	 apt install ant
-	 ant -version
-    fi
+ 
 
 script:
 - ant
