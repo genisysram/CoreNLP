@@ -3,7 +3,7 @@ arch:
     - ppc64le
 language: java
 sudo: required
-dist: bionic
+dist: Xenial
 
 jdk:
  - openjdk11
